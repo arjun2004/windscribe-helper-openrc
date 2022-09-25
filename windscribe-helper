@@ -1,0 +1,14 @@
+#!/usr/bin/openrc-run
+description="Windscribe helper Service"
+supervisor="supervise-daemon"
+command="/opt/windscribe/helper"
+command_args="start"
+
+depend(){
+	after syslog net netmount dns
+}
+stop(){
+	ebegin "Stopping $RC_SVCNAME"
+	/opt/windscribe/helper stop
+	eend $?
+}
